@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown to 8th</title>
+    <link
+  rel="shortcut icon"
+  href="https://cdn.discordapp.com/attachments/1287447653117853716/1347222400294588481/476754735_2052664065247651_1615736800420895259_n.png?ex=67cb0a22&is=67c9b8a2&hm=b46de0bae0466f3105ce9a35fb488ba8065cad5a16bd7e47be34cd120dccf9ed&"
+  type="image/x-icon"
+/>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffe6eb;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background: #ffd7e2;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #ff4081;
+        }
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .countdown div {
+            background: #ffb6c1;
+            padding: 10px;
+            border-radius: 10px;
+            min-width: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Countdown to 8th</h1>
+        <p id="monthCount"></p>
+        <p id="yearCount"></p>
+        <h2>Next 8th of the Month</h2>
+        <div class="countdown">
+            <div><span id="days"></span> days</div>
+            <div><span id="hours"></span> hours</div>
+            <div><span id="minutes"></span> minutes</div>
+            <div><span id="seconds"></span> seconds</div>
+            <div><span id="milliseconds"></span> ms</div>
+        </div>
+        <h2>Next 8th of March</h2>
+        <div class="countdown">
+            <div><span id="daysAnnual"></span> days</div>
+            <div><span id="hoursAnnual"></span> hours</div>
+            <div><span id="minutesAnnual"></span> minutes</div>
+            <div><span id="secondsAnnual"></span> seconds</div>
+            <div><span id="millisecondsAnnual"></span> ms</div>
+        </div>
+    </div>
+    <script>
+        function updateCountdown() {
+            const now = new Date();
+            let targetDate = new Date(now.getFullYear(), now.getMonth(), 8);
+            if (now.getDate() >= 8) {
+                targetDate.setMonth(targetDate.getMonth() + 1);
+            }
+            const targetAnnual = new Date(now.getFullYear() + (now.getMonth() > 2 || (now.getMonth() === 2 && now.getDate() > 8) ? 1 : 0), 2, 8);
+            
+            const timeLeft = targetDate - now;
+            const timeLeftAnnual = targetAnnual - now;
+            
+            document.getElementById("days").textContent = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").textContent = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
+            document.getElementById("minutes").textContent = Math.floor((timeLeft / (1000 * 60)) % 60);
+            document.getElementById("seconds").textContent = Math.floor((timeLeft / 1000) % 60);
+            document.getElementById("milliseconds").textContent = timeLeft % 1000;
+            
+            document.getElementById("daysAnnual").textContent = Math.floor(timeLeftAnnual / (1000 * 60 * 60 * 24));
+            document.getElementById("hoursAnnual").textContent = Math.floor((timeLeftAnnual / (1000 * 60 * 60)) % 24);
+            document.getElementById("minutesAnnual").textContent = Math.floor((timeLeftAnnual / (1000 * 60)) % 60);
+            document.getElementById("secondsAnnual").textContent = Math.floor((timeLeftAnnual / 1000) % 60);
+            document.getElementById("millisecondsAnnual").textContent = timeLeftAnnual % 1000;
+            
+            const monthCount = now.getFullYear() * 12 + now.getMonth() - (2025 * 12 + 2);
+            document.getElementById("monthCount").textContent = `Month count since March 2025: ${monthCount}`;
+            
+            const yearCount = now.getFullYear() - 2025;
+            document.getElementById("yearCount").textContent = `Year count since 2025: ${yearCount}`;
+            
+            setTimeout(updateCountdown, 10);
+        }
+        updateCountdown();
+    </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+  rel="shortcut icon"
+  href="https://cdn.discordapp.com/attachments/1287447653117853716/1347222400294588481/476754735_2052664065247651_1615736800420895259_n.png?ex=67cb0a22&is=67c9b8a2&hm=b46de0bae0466f3105ce9a35fb488ba8065cad5a16bd7e47be34cd120dccf9ed&"
+  type="image/x-icon"
+/>
+    <title>Countdown</title>
+    <style>
+        body {
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            text-align: center;
+            background-color: #ffe4e1;
+            color: #d147a3;
+            margin: 50px;
+        }
+        .countdown-container {
+            background: #ffebf0;
+            padding: 20px;
+            border-radius: 20px;
+            display: inline-block;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        .countdown-header {
+            font-size: 2em;
+            color: #ff1493;
+            margin-bottom: 15px;
+        }
+        .countdown-box {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .time-box {
+            background: #ffb6c1;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 1.5em;
+            font-weight: bold;
+            min-width: 60px;
+            text-align: center;
+        }
+        .time-label {
+            font-size: 0.8em;
+            color: #ff1493;
+            margin-top: 5px;
+        }
+        .decorations {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <div class="decorations">🌸🎀🌸</div>
+        <div class="countdown-header">Near Birthday</div>
+        <div class="countdown-box">
+            <div>
+                <div class="time-box" id="days"></div>
+                <div class="time-label">days</div>
+            </div>
+            <div>
+                <div class="time-box" id="hours"></div>
+                <div class="time-label">hours</div>
+            </div>
+            <div>
+                <div class="time-box" id="minutes"></div>
+                <div class="time-label">minutes</div>
+            </div>
+            <div>
+                <div class="time-box" id="seconds"></div>
+                <div class="time-label">seconds</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function updateCountdown() {
+            const targetDate = new Date(new Date().getFullYear(), 3, 20); // 20 เมษายน
+            const now = new Date();
+            
+            if (now > targetDate) {
+                targetDate.setFullYear(targetDate.getFullYear() + 1); // เลื่อนเป็นปีถัดไปถ้าผ่านไปแล้ว
+            }
+            
+            const timeDiff = targetDate - now;
+            document.getElementById("days").textContent = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").textContent = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("minutes").textContent = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("seconds").textContent = Math.floor((timeDiff % (1000 * 60)) / 1000);
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // เรียกครั้งแรกทันที
+    </script>
+</body>
+</html>

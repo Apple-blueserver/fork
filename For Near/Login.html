@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+  rel="shortcut icon"
+  href="https://cdn.discordapp.com/attachments/1287447653117853716/1347222400294588481/476754735_2052664065247651_1615736800420895259_n.png?ex=67cb0a22&is=67c9b8a2&hm=b46de0bae0466f3105ce9a35fb488ba8065cad5a16bd7e47be34cd120dccf9ed&"
+  type="image/x-icon"
+/>
+  <title>For Near 2.0 </title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <h1>Login</h1>
+      <form id="loginForm" onsubmit="return checkLogin()">
+        <div class="textbox">
+          <input type="text" id="username" placeholder="Username" name="username" required>
+        </div>
+        <div class="textbox">
+          <input type="password" id="password" placeholder="Password" name="password" required>
+        </div>
+        <input type="submit" value="Login">
+      </form>
+      
+      <div class="envelope" id="envelope" onclick="showHint()">📩</div>
+   
+      <div id="hint" class="hint">
+        คำใบ้: ให้ไปดูในไฟล์ Login.html
+      </div>
+    </div>
+  </div>
+
+  <script>
+    
+    function showHint() {
+      const hintElement = document.getElementById('hint');
+      hintElement.style.display = (hintElement.style.display === 'block') ? 'none' : 'block';
+    }
+
+   
+    function checkLogin() {
+      
+      const correctUsername = 'Near';
+      const correctPassword = '200452';
+
+    
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+    
+      if (username === correctUsername && password === correctPassword) {
+ 
+        window.location.href = 'Main.html';
+        return false; 
+      } else {
+        alert('Username หรือ Password ไม่ถูกต้อง!');
+        return false; 
+      }
+    }
+  </script>
+</body>
+</html>
